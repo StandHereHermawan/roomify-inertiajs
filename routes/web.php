@@ -17,6 +17,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('sidebar-01', 'sidebar01')->name('sidebar01');
         Route::get('sidebar-11', 'sidebar11')->name('sidebar11');
     });
+
+    Route::controller(\App\Http\Controllers\Main\RoomController::class)->group(function (){
+        Route::get('room', 'show')->name('room.page');
+    });
 });
 
 require __DIR__.'/settings.php';

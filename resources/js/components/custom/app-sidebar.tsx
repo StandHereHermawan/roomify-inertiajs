@@ -7,10 +7,11 @@ import {
     // PieChart,
     // SquareTerminal,
     // Settings2,
-    // LayoutGrid,
     // Bot,
     // Folder, 
-    BookOpen, 
+    LayoutGrid,
+    BookOpen,
+    DoorOpen, 
 } from "lucide-react"
 import { NavUser } from '@/components/ui/old/nav-user';
 import {
@@ -25,9 +26,18 @@ import {
 import { Link } from '@inertiajs/react';
 import AppLogo from '../ui/old/app-logo';
 import { NavMain as NavAccordeon } from '../custom/nav-main';
-
+import { NavMain } from "../ui/old/nav-main";
+import { NavItem } from "@/types";
 
 export function AppSidebar() {
+
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: LayoutGrid,
+        },
+    ];
 
     const footerNavItemsAcc = [
         {
@@ -53,22 +63,31 @@ export function AppSidebar() {
             title: "Static Pages",
             url: "#",
             icon: BookOpen,
-            isActive: true,
+            isActive: false,
             items: [
                 {
-                    icon: BookOpen,
                     title: "Dashboard 07",
                     url: route('dashboard07'),
                 },
                 {
-                    icon: BookOpen,
                     title: "Sidebar 01",
                     url: route('sidebar01'),
                 },
                 {
-                    icon: BookOpen,
                     title: "Sidebar 11",
                     url: route('sidebar11'),
+                },
+            ],
+        },
+        {
+            title: "Room",
+            url: "#",
+            icon: DoorOpen,
+            isActive: false,
+            items: [
+                {
+                    title: "Room Pages",
+                    url: route('room.page'),
                 },
             ],
         },
@@ -89,6 +108,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
+                <NavMain items={mainNavItems} />
                 <NavAccordeon items={contentNavItems} name="Content"/>
             </SidebarContent>
 
