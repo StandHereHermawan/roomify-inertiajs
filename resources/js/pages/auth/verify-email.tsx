@@ -2,8 +2,8 @@
 import { Form, Head } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 
-import TextLink from '@/components/text-link';
-import { Button } from '@/components/ui/button';
+import TextLink from '@/components/ui/old/text-link';
+import { Button } from '@/components/ui/old/button';
 import AuthLayout from '@/layouts/auth-layout';
 
 export default function VerifyEmail({ status }: { status?: string }) {

@@ -1,9 +1,9 @@
-import HeadingSmall from '@/components/heading-small';
-import InputError from '@/components/input-error';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import HeadingSmall from '@/components/ui/old/heading-small';
+import InputError from '@/components/ui/old/input-error';
+import { Button } from '@/components/ui/old/button';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/old/dialog';
+import { Input } from '@/components/ui/old/input';
+import { Label } from '@/components/ui/old/label';
 import { Form } from '@inertiajs/react';
 import { useRef } from 'react';
 
