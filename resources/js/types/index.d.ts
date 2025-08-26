@@ -41,3 +41,44 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Room {
+    id: number;
+    room_code: string;
+    name: string;
+    description: string;
+    height_in_meter: number;
+    floor_wide_in_meter_squared: number;
+    created_at: string; // Tipe string lebih aman untuk tanggal dari JSON...
+    updated_at: string;
+}
+
+// Interface untuk objek link paginasi
+export interface PaginationLinkType {
+    url: string | null;
+    label: string;
+    page: string;
+    active: boolean;
+}
+
+// Interface utama untuk objek paginator dari Laravel
+export interface Paginator<T> {
+    current_page: number;
+    data: T[]; // T adalah tipe generik untuk item data, seperti Room
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: PaginationLink[];
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+}
+
+interface RoomProps {
+    paginator: Paginator<Room>;
+    className?: string
+}

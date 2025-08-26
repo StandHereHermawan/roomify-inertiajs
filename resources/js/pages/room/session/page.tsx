@@ -14,8 +14,8 @@ export default function ({ page }: { page: Paginator<Room> }) {
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Room Page',
-            href: route('room.page'),
+            title: 'Room Session Page',
+            href: route('room.session.page'),
         },
     ];
 

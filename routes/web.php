@@ -19,7 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::controller(\App\Http\Controllers\Main\RoomController::class)->group(function (){
-        Route::get('room', 'show')->name('room.page');
+        Route::get('room', 'showRoomPaginate')->name('room.page');
     });
 });
 

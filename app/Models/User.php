@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Attributes\HasIdentifier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,16 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory,
+        HasIdentifier,
+        Notifiable;
+
+        public const TABLE_NAME = 'users';
+        public const NAME = 'name';
+        public const EMAIL = 'email';
+        public const EMAIL_VERIFIED_AT = 'email_verified_at';
+        public const PASSWORD = 'password';
+        public const REMEMBER_TOKEN = 'remember_token';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +28,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+     // self::ID,
+        self::NAME,
+        self::EMAIL,
+        self::PASSWORD,
     ];
 
     /**
@@ -29,8 +40,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        self::PASSWORD,
+        self::REMEMBER_TOKEN,
     ];
 
     /**
@@ -41,8 +52,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            self::EMAIL_VERIFIED_AT => 'datetime',
+            self::PASSWORD => 'hashed',
         ];
     }
 }
