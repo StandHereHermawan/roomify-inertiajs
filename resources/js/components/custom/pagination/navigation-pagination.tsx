@@ -9,8 +9,8 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import {
+    PaginationComponentProps,
     PaginationLinkType,
-    RoomProps
 } from "@/types/index";
 import {
     Link,
@@ -18,7 +18,7 @@ import {
 } from "@inertiajs/react";
 import React, { useMemo } from "react";
 
-function CustomPaginationNavigation({ paginator, className }: RoomProps) {
+function CustomPaginationNavigation<T>({ paginator, className, urlDestination = 'room.page' }: PaginationComponentProps<T>) {
     // Gunakan useMemo untuk menghitung link yang akan ditampilkan
     // hanya ketika paginator berubah
     const pagesToRender = useMemo(() => {
@@ -72,7 +72,54 @@ function CustomPaginationNavigation({ paginator, className }: RoomProps) {
                 <PaginationContent className="w-full justify-center xl:justify-between gap-4 px-4 lg:px-6">
                     <div className="hidden xl:block">
                         <div className="text-muted-foreground text-sm">
-                            <div>Showing sequence items from <b>{paginator.from}</b> to <b>{paginator.to}</b>. Items per Pages: <b>{paginator.per_page}</b>.</div>
+                            {/* <div>Showing sequence items from <b>{paginator.from}</b> to <b>{paginator.to}</b>. Items per Pages: <b>{paginator.per_page}</b>.</div> */}
+                            <div className="flex flex-row gap-1">
+                                <div>Showing sequence items from <b>{paginator.from}</b> to <b>{paginator.to}</b>.</div>
+                                {/* <div>Items per Pages: <b>{paginator.per_page}</b>.</div> */}
+                            </div>
+                            <div className="flex flex-row gap-1">
+                                <div className="">Items per Pages:</div>
+                                <form
+                                    onSubmit={(event) => {
+                                        event.preventDefault();
+                                        console.info("Seletah Prevent Default di navigation-pagination dipanggil.");
+
+                                        const form: HTMLFormElement = event.currentTarget;
+                                        const input = form.querySelector<HTMLInputElement>("input[name='per_page']");
+
+                                        const inputNull = input === null;
+                                        if (inputNull) {
+                                            return
+                                        };
+
+                                        const perPageValueFromStringToNumberDataType = Number(input.value);
+
+                                        // Validasi apakah per_page bukan angka.
+                                        const perpageIsNotaNumber = Number.isNaN(perPageValueFromStringToNumberDataType);
+                                        if (perpageIsNotaNumber) {
+                                            return
+                                        };
+
+                                        // Validasi apakah per_page tipe-nya bukan angka.
+                                        const numberIsNotInteger = !Number.isInteger(perPageValueFromStringToNumberDataType);
+                                        if (numberIsNotInteger) {
+                                            input.value = String(paginator.current_page);
+                                            return
+                                        };
+
+                                        router.get(
+                                            route(urlDestination, { per_page: perPageValueFromStringToNumberDataType }),
+                                            {},
+                                            { preserveScroll: true }
+                                        );
+                                    }}>
+                                    <Input
+                                        defaultValue={paginator.per_page}
+                                        name="per_page"
+                                        className="w-12 px-2 h-5 text-center border rounded-md"
+                                    />
+                                </form>
+                            </div>
                             <div className="flex flex-row gap-1">
                                 <div>Total Items: <b className="font-extrabold">{paginator.total}</b>.</div>
                                 <div>Current Pages: <b className="font-extrabold">{paginator.current_page}</b>.</div>
@@ -102,7 +149,7 @@ function CustomPaginationNavigation({ paginator, className }: RoomProps) {
                                                 <form
                                                     onSubmit={(event) => {
                                                         event.preventDefault();
-                                                        console.info("Seletah Prevent");
+                                                        console.info("Seletah Prevent Default di navigation-pagination dipanggil.");
 
                                                         const form: HTMLFormElement = event.currentTarget;
                                                         const input = form.querySelector<HTMLInputElement>("input[name='page']");
@@ -135,7 +182,7 @@ function CustomPaginationNavigation({ paginator, className }: RoomProps) {
                                                         };
 
                                                         router.get(
-                                                            route("room.page", { page: pageIntValue }),
+                                                            route(urlDestination, { page: pageIntValue }),
                                                             {},
                                                             { preserveScroll: true }
                                                         );

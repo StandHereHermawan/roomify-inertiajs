@@ -1,16 +1,16 @@
-import { CardList } from '@/components/custom/pagination/card-pages';
 import {
     CustomPaginationNavigation as CustomPagination
 } from '@/components/custom/pagination/navigation-pagination';
 import {
     Paginator,
-    Room,
+    RoomSession,
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
 import AppLayout from '@/layouts/custom/app-layout';
+import RoomSessionTable from '@/components/custom/pagination/content/table-room-session-pages';
 
-export default function ({ page }: { page: Paginator<Room> }) {
+export default function ({ page }: { page: Paginator<RoomSession> }) {
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -22,9 +22,11 @@ export default function ({ page }: { page: Paginator<Room> }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={breadcrumbs[0].title} />
-            <div className='py-4'>
-                <CustomPagination paginator={page} />
-                <CardList paginator={page} />
+            <div className='p-4'>
+                <div className='pb-3'>
+                    <CustomPagination paginator={page} urlDestination='room.session.page'/>
+                </div>
+                <RoomSessionTable paginator={page} />
             </div>
         </AppLayout>
     );

@@ -1,21 +1,21 @@
-import { RoomCardList } from '@/components/custom/pagination/content/card-room-pages';
 import {
     CustomPaginationNavigation as CustomPagination
 } from '@/components/custom/pagination/navigation-pagination';
 import {
     Paginator,
-    Room,
+    User,
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
 import AppLayout from '@/layouts/custom/app-layout';
+import UserTable from '@/components/custom/pagination/content/table-user-pages';
 
-export default function ({ page }: { page: Paginator<Room> }) {
+export default function ({ page }: { page: Paginator<User> }) {
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Room Page',
-            href: route('room.page'),
+            title: 'Registered Users Page',
+            href: route('user.page'),
         },
     ];
 
@@ -24,9 +24,9 @@ export default function ({ page }: { page: Paginator<Room> }) {
             <Head title={breadcrumbs[0].title} />
             <div className='p-4'>
                 <div className='pb-3'>
-                    <CustomPagination paginator={page} urlDestination='room.page'/>
+                    <CustomPagination paginator={page} urlDestination='user.page'/>
                 </div>
-                <RoomCardList paginator={page} />
+                <UserTable paginator={page}></UserTable>
             </div>
         </AppLayout>
     );

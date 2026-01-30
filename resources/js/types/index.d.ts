@@ -53,6 +53,14 @@ export interface Room {
     updated_at: string;
 }
 
+export interface RoomSession {
+    id: number;
+    room_session_start: string;
+    room_session_end: string;
+    created_at: string; // Tipe string lebih aman untuk tanggal dari JSON...
+    updated_at: string;
+}
+
 // Interface untuk objek link paginasi
 export interface PaginationLinkType {
     url: string | null;
@@ -78,7 +86,8 @@ export interface Paginator<T> {
     total: number;
 }
 
-interface RoomProps {
-    paginator: Paginator<Room>;
-    className?: string
+export interface PaginationComponentProps<T> {
+    paginator: Paginator<T>;
+    className?: string;
+    urlDestination?: string;
 }

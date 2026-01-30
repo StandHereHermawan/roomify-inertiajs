@@ -2,19 +2,25 @@
 
 namespace Tests\Feature\Room;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-// use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 use App\Models\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use Tests\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEquals;
 use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 
+// use Illuminate\Foundation\Testing\RefreshDatabase;
+// use Illuminate\Foundation\Testing\WithFaker;
+
 class RoomServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected $service;
 
     protected function setUp(): void
@@ -95,24 +101,23 @@ class RoomServiceTest extends TestCase
         $model = Room::create($data_old);
 
         $this->service->delete($model);
-
         $this->expectException(ModelNotFoundException::class);
-        Room::where(Room::ID, '=', $model[Room::ID])->firstOrFail();
+        
+        Room::where(Room::ID, '=', $model[Room::ID])
+            ->firstOrFail();
     }
 
     /**
      * 
      */
-    public function test_it_should_success_room_pages(): void
+    public function test_it_should_success_paginate_room_pages(): void
     {
         DB::transaction(function () {
-            \App\Models\Room::factory()->count(50)->create();
+            Room::factory()->count(50)->create();
         });
 
         $page = $this->service->roomPages(5, 'room_pages', 2);
 
         assertNotNull($page);
-        $json = json_encode($page, JSON_PRETTY_PRINT);
-        echo "$json";
     }
 }

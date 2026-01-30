@@ -18,8 +18,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('sidebar-11', 'sidebar11')->name('sidebar11');
     });
 
-    Route::controller(\App\Http\Controllers\Main\RoomController::class)->group(function (){
+    Route::controller(\App\Http\Controllers\Sessions\RoomSessionController::class)->group(function (){
+        Route::get('room-session', 'showRoomSessionPaginate')->name('room.session.page');
+    });
+
+    Route::controller(\App\Http\Controllers\Rooms\RoomController::class)->group(function (){
         Route::get('room', 'showRoomPaginate')->name('room.page');
+    });
+
+    Route::controller(\App\Http\Controllers\Users\UserController::class)->group(function (){
+        Route::get('users', 'showUserPagination')->name('user.page');
     });
 });
 

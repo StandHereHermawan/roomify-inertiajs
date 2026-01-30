@@ -13,6 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/old/sidebar"
+import { DataTableDemo } from "@/components/table/data-table"
 
 export default function Page() {
   return (
@@ -48,6 +49,9 @@ export default function Page() {
             <div className="bg-muted/50 aspect-video rounded-xl" />
           </div>
           <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+          <div>
+            <DataTableDemo />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

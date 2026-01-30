@@ -1,5 +1,6 @@
 import {
-    RoomProps
+    PaginationComponentProps,
+    Room
 } from "@/types/index";
 import {
     Card,
@@ -10,19 +11,19 @@ import {
     CardTitle
 } from '@/components/ui/card';
 
-function CardList({ paginator }: RoomProps) {
+function RoomCardList({ paginator }: PaginationComponentProps<Room>) {
     return (
-        <div className='pt-3 @container/main'>
-            <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @7xl/main:grid-cols-4'>
+        <div className='@container/main'>
+            <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @7xl/main:grid-cols-4'>
                 {paginator.data.map((room, index) => {
                     return (
                         <Card className='@container/card transition-transform duration-200 hover:-translate-y-2 hover:shadow-lg' key={index}>
                             <CardHeader>
                                 <CardDescription>{room.name}</CardDescription>
-                                <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>{room.room_code}</CardTitle>
+                                <CardTitle className='text-2xl font-extrabold tabular-nums @[250px]/card:text-4xl @[250px]/card:font-extrabold'>{room.room_code}</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <CardDescription>
+                                <CardDescription className="line-clamp-5">
                                     {room.description}
                                 </CardDescription>
                             </CardContent>
@@ -43,5 +44,5 @@ function CardList({ paginator }: RoomProps) {
 }
 
 export {
-    CardList
+    RoomCardList
 }

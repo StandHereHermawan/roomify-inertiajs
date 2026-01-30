@@ -15,12 +15,12 @@ class User extends Authenticatable
         HasIdentifier,
         Notifiable;
 
-        public const TABLE_NAME = 'users';
-        public const NAME = 'name';
-        public const EMAIL = 'email';
-        public const EMAIL_VERIFIED_AT = 'email_verified_at';
-        public const PASSWORD = 'password';
-        public const REMEMBER_TOKEN = 'remember_token';
+    public const TABLE_NAME = 'users';
+    public const NAME = 'name';
+    public const EMAIL = 'email';
+    public const EMAIL_VERIFIED_AT = 'email_verified_at';
+    public const PASSWORD = 'password';
+    public const REMEMBER_TOKEN = 'remember_token';
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-     // self::ID,
+        self::ID,
         self::NAME,
         self::EMAIL,
         self::PASSWORD,
