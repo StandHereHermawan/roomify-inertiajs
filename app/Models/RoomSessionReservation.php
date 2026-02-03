@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Traits\Attributes\HasIdentifier;
 use App\Traits\HasBasicAudit;
+use App\Traits\Relation\HasRelationWithUserModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RoomSessionReservation extends Model
 {
@@ -14,7 +16,9 @@ class RoomSessionReservation extends Model
      * @use HasRelationWithUserModel<App\Traits\Relation\HasRelationWithUserModel> 
      */
     use HasIdentifier,
-        HasBasicAudit
+        HasBasicAudit,
+        HasRelationWithUserModel,
+        SoftDeletes
     ;
 
     public const TABLE_NAME = "sipr_room_session_reservations";

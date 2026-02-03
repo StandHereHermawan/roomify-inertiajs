@@ -46,19 +46,19 @@ class RoomFactory extends Factory
 
         return [
             // Menghasilkan kode unik seperti 'AB-123'
-            'room_code' => fake()->unique()->toUpper(fake()->bothify('?-###')),
+            Room::CODE => fake()->unique()->toUpper(fake()->bothify('?-###')),
             
             // Menghasilkan nama ruangan yang umum, misal: 'Ruang Rapat Cempaka'
-            'name' => 'Ruang ' . fake()->words(2, true),
+            Room::NAME => 'Ruang ' . fake()->words(2, true),
             
             // Menghasilkan teks deskripsi yang terdiri dari 3 paragraf
-            'description' => fake()->paragraphs(3, true),
+            Room::DESCRIPTION => fake()->paragraphs(3, true),
 
             // Menghasilkan angka float untuk tinggi ruangan, misal: 3.50 (meter)
-            'height_in_meter' => fake()->randomFloat(2, 2.5, 4.5),
+            Room::HEIGHT_IN_METER => fake()->randomFloat(2, 2.5, 4.5),
 
             // Menghasilkan angka float untuk luas lantai, misal: 25.50 (meter persegi)
-            'floor_wide_in_meter_squared' => fake()->randomFloat(2, 9, 100),
+            Room::FLOOR_WIDE_IN_METER_SQUARED => fake()->randomFloat(2, 9, 100),
             
             // Kolom created_at dan updated_at akan diisi otomatis oleh Laravel
         ];

@@ -6,13 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
 
+    private const TABLE_NAME = "sipr_room_reservations";
     private const ID = "id";
     private const CREATED_AT = "created_at";
     private const UPDATED_AT = "updated_at";
-    private const DELETED_AT = "deleted_at";
-    private const TABLE_NAME = "sipr_room_reservations";
-    private const SESSION_START = 'room_session_start';
-    private const SESSION_END = 'room_session_end';
     private const TABLE_ROOM = "sipr_rooms";
     private const TABLE_ROOM_COLUMN_ID = "id";
     private const ROOM_ID = "room_id";
@@ -81,6 +78,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists(self::TABLE_NAME);
+        if (Schema::hasTable(self::TABLE_NAME)) {
+            // Jika ada, lakukan drop
+            Schema::dropIfExists(self::TABLE_NAME);
+            
+            // Anda bisa menambahkan log atau pesan di sini jika diperlukan
+            // Log::info("Tabel " . self::TABLE_NAME . " berhasil dihapus.");
+        }
     }
 };

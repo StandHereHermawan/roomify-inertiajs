@@ -60,7 +60,7 @@ export function AppSidebar() {
         },
         {
             title: "Active Session Pages",
-            href: "",
+            href: route('user.session.page'),
             icon: UserCheck2Icon,
         },
     ];

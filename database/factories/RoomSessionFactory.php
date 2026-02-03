@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RoomSession;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -38,8 +39,8 @@ class RoomSessionFactory extends Factory
 
         // 4. Kembalikan data untuk record saat ini
         return [
-            'room_session_start' => $sessionStart->format('H:i:s'),
-            'room_session_end'   => $sessionEnd->format('H:i:s'),
+            RoomSession::SESSION_START => $sessionStart->format('H:i:s'),
+            RoomSession::SESSION_END => $sessionStart->format('H:i:s'),
         ];
     }
 }

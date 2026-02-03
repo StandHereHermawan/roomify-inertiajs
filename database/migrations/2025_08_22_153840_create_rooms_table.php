@@ -21,53 +21,57 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-            $description =
-                'Lorem ipsum dolor, sit amet consectetur adipisicing elit.' . ' ' .
-                'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
-                'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
-                'quis voluptate quibusdam ad, nemo voluptatibus enim tempore doloremque qui officia?';
+        if (Schema::hasTable(self::TABLE_NAME)) {
+            # code...
+        } else {
+            Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+                $description =
+                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit.' . ' ' .
+                    'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
+                    'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
+                    'quis voluptate quibusdam ad, nemo voluptatibus enim tempore doloremque qui officia?';
 
-            $table
-                ->id(self::ID)
-                ->autoIncrement()
-                ->unsigned()
-                ->nullable(false);
+                $table
+                    ->id(self::ID)
+                    ->autoIncrement()
+                    ->unsigned()
+                    ->nullable(false);
 
-            $table
-                ->string(self::CODE, 255)
-                ->nullable(false)
-                ->unique();
+                $table
+                    ->string(self::CODE, 255)
+                    ->nullable(false)
+                    ->unique();
 
-            $table
-                ->string(self::NAME, 255)
-                ->nullable()
-                ->default('Belum Ada Nama.');
+                $table
+                    ->string(self::NAME, 255)
+                    ->nullable()
+                    ->default('Belum Ada Nama.');
 
-            $table
-                ->longText(self::DESCRIPTION)
-                ->nullable()
-                ->default($description);
+                $table
+                    ->longText(self::DESCRIPTION)
+                    ->nullable()
+                    ->default($description);
 
-            $table
-                ->float(self::HEIGHT)
-                ->nullable(true);
+                $table
+                    ->float(self::HEIGHT)
+                    ->nullable(true);
 
-            $table
-                ->float(self::FLOOR_WIDE)
-                ->nullable(true);
+                $table
+                    ->float(self::FLOOR_WIDE)
+                    ->nullable(true);
 
-            $table
-                ->dateTime(self::CREATED_AT)
-                ->nullable(true)
-                ->useCurrent();
+                $table
+                    ->dateTime(self::CREATED_AT)
+                    ->nullable(true)
+                    ->useCurrent();
 
-            $table
-                ->dateTime(self::UPDATED_AT)
-                ->nullable(true)
-                ->useCurrent()
-                ->useCurrentOnUpdate();
-        });
+                $table
+                    ->dateTime(self::UPDATED_AT)
+                    ->nullable(true)
+                    ->useCurrent()
+                    ->useCurrentOnUpdate();
+            });
+        }
     }
 
     /**
@@ -75,6 +79,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists(self::TABLE_NAME);
+        if (Schema::hasTable(self::TABLE_NAME)) {
+            // Jika ada, lakukan drop
+            Schema::dropIfExists(self::TABLE_NAME);
+
+            // Anda bisa menambahkan log atau pesan di sini jika diperlukan
+            // Log::info("Tabel " . self::TABLE_NAME . " berhasil dihapus.");
+        }
     }
 };

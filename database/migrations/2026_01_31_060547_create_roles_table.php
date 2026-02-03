@@ -4,14 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-
-    private const TABLE_NAME = 'sipr_room_sessions';
-    private const ID = "id";
+return new class extends Migration
+{
+    private const TABLE_NAME = 'sipr_roles';
+    private const NAME = 'role';
     private const CREATED_AT = "created_at";
     private const UPDATED_AT = "updated_at";
-    private const SESSION_START = 'room_session_start';
-    private const SESSION_END = 'room_session_end';
+    // private const DELETED_AT = "deleted_at";
 
     /**
      * Run the migrations.
@@ -23,13 +22,17 @@ return new class extends Migration {
         } else {
             Schema::create(self::TABLE_NAME, function (Blueprint $table) {
                 $table
-                    ->id(self::ID)
+                    ->id()
                     ->autoIncrement()
                     ->unsigned()
                     ->nullable(false);
 
-                $table->time(self::SESSION_START)->nullable(false);
-                $table->time(self::SESSION_END)->nullable(false);
+                $table
+                    ->string(self::NAME, 30)
+                    ->unique();
+
+                $table
+                    ->softDeletesDatetime();
 
                 $table
                     ->dateTime(self::CREATED_AT)

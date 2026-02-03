@@ -22,16 +22,16 @@ class RoomSessionSeeder extends Seeder
 
         // 2. Jika sudah ada, tampilkan pesan dan hentikan proses seeder ini.
         if ($sessionExists) {
-            Log::info('Data Room Sessions sudah ada. Proses seeding dilewati.');
+            Log::debug('Data Room Sessions sudah ada. Proses seeding dilewati.');
             return;
         }
 
         // 3. Jika belum ada, panggil factory untuk membuat data sesi baru.
         // Anda bisa menentukan berapa banyak sesi yang ingin dibuat di sini.
         // Contoh: Membuat 12 sesi berurutan.
-        Log::info('Membuat data Room Sessions baru...');
+        Log::debug('Membuat data Room Sessions baru...');
         RoomSession::factory(12)->create();
 
-        Log::info('Seeding Room Sessions selesai.');
+        Log::debug('Seeding Room Sessions selesai.');
     }
 }
