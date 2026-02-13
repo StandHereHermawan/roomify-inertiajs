@@ -11,12 +11,10 @@ class UserSession extends Model
 {
     /**
      * @use HasBasicAudit<App\Traits\HasBasicAudit> 
-     * @use HasIdentifier<App\Traits\Attributes\HasIdentifier> 
      * @use HasRelationWithUserModel<\App\Traits\Relation\HasRelationWithUserModel> 
      * 
      */
     use HasIdentifier,
-        HasBasicAudit,
         HasRelationWithUserModel;
 
     public const TABLE_NAME = 'sessions';
@@ -38,8 +36,7 @@ class UserSession extends Model
         self::USER_AGENT,
         self::PAYLOAD,
         self::LAST_ACTIVITY,
+        self::USER_ID,
         self::ID,
-        self::CREATED_AT,
-        self::UPDATED_AT
     ];
 }

@@ -15,6 +15,7 @@ import {
     Clock,
     UserCircle2Icon,
     UserCheck2Icon,
+    CheckCircle,
 } from "lucide-react"
 import { NavUser } from '@/components/ui/old/nav-user';
 import {
@@ -54,6 +55,11 @@ export function AppSidebar() {
             icon: Clock,
         },
         {
+            title: "Room Reservation Pages",
+            href: route('room.reservation.page'),
+            icon: Clock,
+        },
+        {
             title: "Registered User Pages",
             href: route('user.page'),
             icon: UserCircle2Icon,
@@ -62,6 +68,11 @@ export function AppSidebar() {
             title: "Active Session Pages",
             href: route('user.session.page'),
             icon: UserCheck2Icon,
+        },
+        {
+            title: "Role Pages",
+            href: route('role.page'),
+            icon: CheckCircle,
         },
     ];
 

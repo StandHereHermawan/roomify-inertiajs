@@ -14,7 +14,6 @@ return new class extends Migration {
     private const FLOOR_WIDE = 'floor_wide_in_meter_squared';
     private const CREATED_AT = "created_at";
     private const UPDATED_AT = "updated_at";
-    private const DELETED_AT = "deleted_at";
 
     /**
      * Run the migrations.

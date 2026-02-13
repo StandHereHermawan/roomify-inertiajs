@@ -72,6 +72,14 @@ export interface RoomSession {
     updated_at: string;
 }
 
+export interface Role {
+    id: number;
+    role: string;
+    created_at: string; // Tipe string lebih aman untuk tanggal dari JSON...
+    deleted_at: string; // Tipe string lebih aman untuk tanggal dari JSON...
+    updated_at: string;
+}
+
 // Interface untuk objek link paginasi
 export interface PaginationLinkType {
     url: string | null;

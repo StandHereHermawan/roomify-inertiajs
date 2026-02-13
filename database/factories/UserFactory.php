@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Dummies\UserDataExamples;
+use App\Enums\EnumsRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +14,7 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+
     /**
      * The current password being used by the factory.
      */
@@ -50,6 +53,18 @@ class UserFactory extends Factory
             User::EMAIL => 'terry@localhost.com',
             User::EMAIL_VERIFIED_AT => now(),
             User::PASSWORD => Hash::make('Rahasia'),
+            User::REMEMBER_TOKEN => Str::random(10),
+        ]);
+    }
+
+    public function superAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            User::NAME => EnumsRole::SUPER_ADMIN->value,
+            User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMY,
+            User::EMAIL_VERIFIED_AT => now(),
+            User::PASSWORD => Hash::make('password'),
+            User::REMEMBER_TOKEN => Str::random(10),
         ]);
     }
 }

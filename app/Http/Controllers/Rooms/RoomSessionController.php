@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Rooms;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Session\RoomSessionIndexRequest;
 use App\Models\RoomSession;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class RoomSessionController extends Controller
@@ -18,6 +19,8 @@ class RoomSessionController extends Controller
             $request->validated()[RoomSessionIndexRequest::PAGE]
         )->withQueryString();
 
-        return Inertia::render('room/session/page', [RoomSessionIndexRequest::PAGE => $page]);
+        Log::debug($page);
+
+        return Inertia::render('room/session', [RoomSessionIndexRequest::PAGE => $page]);
     }
 }

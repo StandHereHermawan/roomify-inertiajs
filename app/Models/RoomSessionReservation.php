@@ -13,13 +13,12 @@ class RoomSessionReservation extends Model
     /**
      * @use HasBasicAudit<App\Traits\Audit\HasBasicAudit> 
      * @use HasIdentifier<App\Traits\Attribute\HasIdentifier> 
-     * @use HasRelationWithUserModel<App\Traits\Relation\HasRelationWithUserModel> 
+     * @/use HasRelationWithUserModel<App\Traits\Relation\HasRelationWithUserModel> 
      */
     use HasIdentifier,
-        HasBasicAudit,
-        HasRelationWithUserModel,
-        SoftDeletes
-    ;
+        // HasRelationWithUserModel,
+        // SoftDeletes,
+        HasBasicAudit;
 
     public const TABLE_NAME = "sipr_room_session_reservations";
     public const ROOM_RESERVATION_ID = "room_reservation_id";
@@ -36,10 +35,10 @@ class RoomSessionReservation extends Model
         self::ROOM_RESERVATION_ID,
         self::RESERVATION_DATE,
         self::ROOM_SESSION_ID,
-        self::USER_ID,
         self::ID,
         self::CREATED_AT,
         self::UPDATED_AT,
-        self::DELETED_AT,
+        // self::USER_ID,
+        // self::DELETED_AT,
     ];
 }

@@ -36,6 +36,11 @@ class UserHasRole extends Model
         return $this->session;
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         self::ID,
         self::ROLE_ID,

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Dummies\UserDataExamples;
 use App\Enums\EnumsRole;
 use App\Models\Role;
 use App\Models\User;
@@ -18,14 +19,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         DB::transaction(function () {
             $user = User::select()->where(User::NAME, '=', EnumsRole::SUPER_ADMIN->value)->first() ??
                 User::factory()->create([
                     User::NAME => EnumsRole::SUPER_ADMIN->value,
                     User::PASSWORD => Hash::make('password'),
-                    User::EMAIL => 'super.admin@example.com',
+                    User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMY,
                 ]);
 
             $role = Role::where(Role::NAME, '=', EnumsRole::SUPER_ADMIN->value)->first() ??
@@ -42,7 +43,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoomSeeder::class,
             RoomSessionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
+            RoomSessionReservationSeeder::class
         ]);
     }
 }

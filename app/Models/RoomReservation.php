@@ -22,9 +22,6 @@ class RoomReservation extends Model
     public const TABLE_NAME = "sipr_room_reservations";
     public const ROOM_ID = "room_id";
     public const STATUS = "status";
-    public const STATUS_PENDING = "PENDING";
-    public const STATUS_REJECTED = "REJECTED";
-    public const STATUS_ACCEPTED = "ACCEPTED";
     public const DETERMINED_AT = "determined_at";
     public const RESERVATION_DATE = "reservation_date";
 

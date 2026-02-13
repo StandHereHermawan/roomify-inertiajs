@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Rooms;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Room\RoomIndexRequest;
 use App\Models\Room;
-use App\Services\RoomService;
 use Inertia\Inertia;
 
 class RoomController extends Controller

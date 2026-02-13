@@ -11,7 +11,14 @@ use Illuminate\Support\Carbon;
  */
 class RoomSessionFactory extends Factory
 {
-      /**
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     */
+    protected $model = RoomSession::class;
+
+    /**
      * @var \Illuminate\Support\Carbon|null Waktu mulai untuk sesi berikutnya.
      * Variabel ini 'mengingat' state di antara panggilan factory.
      */
@@ -40,7 +47,7 @@ class RoomSessionFactory extends Factory
         // 4. Kembalikan data untuk record saat ini
         return [
             RoomSession::SESSION_START => $sessionStart->format('H:i:s'),
-            RoomSession::SESSION_END => $sessionStart->format('H:i:s'),
+            RoomSession::SESSION_END => $sessionEnd->format('H:i:s'),
         ];
     }
 }
