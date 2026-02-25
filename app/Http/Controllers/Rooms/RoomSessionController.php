@@ -23,4 +23,9 @@ class RoomSessionController extends Controller
 
         return Inertia::render('room/session', [RoomSessionIndexRequest::PAGE => $page]);
     }
+
+    public function addRoomSession()
+    {
+        return Inertia::render('room/add-room-session');
+    }
 }

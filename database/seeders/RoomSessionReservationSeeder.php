@@ -20,78 +20,133 @@ class RoomSessionReservationSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::firstOrCreate(
-            [User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMY], // Kolom untuk pengecekan
+        $superAdmin = User::firstOrCreate(
+            [User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMIES], // Kolom untuk pengecekan
             User::factory()->superAdmin()->raw() // Data yang dibuat jika tidak ditemukan
         );
 
-        $room = Room::firstOrCreate(
+        $roomB203 = Room::firstOrCreate(
             [Room::CODE => RoomDataExamples::ROOM_CODE_B_203],
             Room::factory()->roomB203()->raw()
         );
 
-        $roomSession_7_00_am = RoomSession::firstOrCreate([
+        $roomB211 = Room::firstOrCreate(
+            [Room::CODE => RoomDataExamples::ROOM_CODE_B_211],
+            Room::factory()->roomB211()->raw()
+        );
+
+        $roomSession_7_00 = RoomSession::firstOrCreate([
             RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(0)->setSecond(0)->format('H:i:s'),
         ], [
-            RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(0)->setSecond(0)->format('H:i:s'),
-            RoomSession::SESSION_END => Carbon::today()->setHour(7)->setMinute(49)->setSecond(59)->format('H:i:s'),
+            RoomSession::factory()->session_7_00_00_to_7_49_59()->raw(),
         ]);
 
-        $roomSession_7_50_am = RoomSession::firstOrCreate([
+        $roomSession_7_50 = RoomSession::firstOrCreate([
             RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(50)->setSecond(0)->format('H:i:s'),
         ], [
-            RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(50)->setSecond(0)->format('H:i:s'),
-            RoomSession::SESSION_END => Carbon::today()->setHour(8)->setMinute(39)->setSecond(59)->format('H:i:s'),
+            RoomSession::factory()->session_7_50_00_to_8_39_59()->raw(),
         ]);
 
-        $roomSession_8_40_am = RoomSession::firstOrCreate([
+        $roomSession_8_40 = RoomSession::firstOrCreate([
             RoomSession::SESSION_START => Carbon::today()->setHour(8)->setMinute(40)->setSecond(0)->format('H:i:s'),
         ], [
-            RoomSession::SESSION_START => Carbon::today()->setHour(8)->setMinute(40)->setSecond(0)->format('H:i:s'),
-            RoomSession::SESSION_END => Carbon::today()->setHour(9)->setMinute(29)->setSecond(59)->format('H:i:s'),
+            RoomSession::factory()->session_8_40_00_to_9_29_59()->raw(),
         ]);
 
-        $roomReservation = RoomReservation::firstOrCreate(
+        $roomSession_12_50 = RoomSession::firstOrCreate([
+            RoomSession::SESSION_START => Carbon::today()->setHour(12)->setMinute(50)->setSecond(0)->format('H:i:s'),
+        ], [
+            RoomSession::factory()->session_12_50_00_to_13_39_59()->raw(),
+        ]);
+
+        $roomSession_13_40 = RoomSession::firstOrCreate([
+            RoomSession::SESSION_START => Carbon::today()->setHour(13)->setMinute(40)->setSecond(0)->format('H:i:s'),
+        ], [
+            RoomSession::factory()->session_13_40_00_to_14_29_59()->raw(),
+        ]);
+
+        $roomSession_14_30 = RoomSession::firstOrCreate([
+            RoomSession::SESSION_START => Carbon::today()->setHour(14)->setMinute(30)->setSecond(0)->format('H:i:s'),
+        ], [
+            RoomSession::factory()->session_14_30_00_to_15_19_59()->raw(),
+        ]);
+
+        $roomReservationSuperAdminFirst = RoomReservation::firstOrCreate(
             [
-                RoomReservation::USER_ID => $users->getId(),
-                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime(),
-                RoomReservation::ROOM_ID => $room->getId()
+                RoomReservation::USER_ID => $superAdmin->getId(),
+                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime()->format('Y-m-d'),
+                // RoomReservation::DETERMINED_AT => now(),
+                RoomReservation::ROOM_ID => $roomB203->getId()
             ],
             [
-                RoomReservation::USER_ID => $users->getId(),
-                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime(),
-                RoomReservation::ROOM_ID => $room->getId()
+                RoomReservation::USER_ID => $superAdmin->getId(),
+                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime()->format('Y-m-d'),
+                // RoomReservation::DETERMINED_AT => now(),
+                RoomReservation::ROOM_ID => $roomB203->getId()
             ]
         );
 
         RoomSessionReservation::firstOrCreate([
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_00_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_00->getId()
         ], [
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_00_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_00->getId()
         ]);
 
         RoomSessionReservation::firstOrCreate([
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_50_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_50->getId()
         ], [
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_50_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_7_50->getId()
         ]);
 
         RoomSessionReservation::firstOrCreate([
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_8_40_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_8_40->getId()
         ], [
-            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservation->getId(),
-            // RoomSessionReservation::USER_ID => $users->getId(),
-            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_8_40_am->getId()
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminFirst->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_8_40->getId()
+        ]);
+
+        $roomReservationSuperAdminSecond = RoomReservation::firstOrCreate(
+            [
+                RoomReservation::USER_ID => $superAdmin->getId(),
+                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime()->format('Y-m-d'),
+                // RoomReservation::DETERMINED_AT => now(),
+                RoomReservation::ROOM_ID => $roomB211->getId()
+            ],
+            [
+                RoomReservation::USER_ID => $superAdmin->getId(),
+                RoomReservation::RESERVATION_DATE => now()->addDay()->toDateTime()->format('Y-m-d'),
+                // RoomReservation::DETERMINED_AT => now(),
+                RoomReservation::ROOM_ID => $roomB211->getId()
+            ]
+        );
+
+        RoomSessionReservation::firstOrCreate([
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_12_50->getId()
+        ], [
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_12_50->getId()
+        ]);
+
+        RoomSessionReservation::firstOrCreate([
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_13_40->getId()
+        ], [
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_13_40->getId()
+        ]);
+
+        RoomSessionReservation::firstOrCreate([
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_14_30->getId()
+        ], [
+            RoomSessionReservation::ROOM_RESERVATION_ID => $roomReservationSuperAdminSecond->getId(),
+            RoomSessionReservation::ROOM_SESSION_ID => $roomSession_14_30->getId()
         ]);
     }
 }

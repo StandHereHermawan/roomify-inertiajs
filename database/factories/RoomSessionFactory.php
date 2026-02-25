@@ -50,4 +50,60 @@ class RoomSessionFactory extends Factory
             RoomSession::SESSION_END => $sessionEnd->format('H:i:s'),
         ];
     }
+
+    public function session_7_00_00_to_7_49_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(0)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(7)->setMinute(49)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_7_50_00_to_8_39_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(7)->setMinute(50)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(8)->setMinute(39)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_8_40_00_to_9_29_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(8)->setMinute(40)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(9)->setMinute(29)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_12_00_00_to_12_49_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(12)->setMinute(0)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(12)->setMinute(49)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_12_50_00_to_13_39_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(12)->setMinute(50)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(13)->setMinute(39)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_13_40_00_to_14_29_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(13)->setMinute(40)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(14)->setMinute(29)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
+
+    public function session_14_30_00_to_15_19_59(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            RoomSession::SESSION_START => Carbon::today()->setHour(14)->setMinute(30)->setSecond(0)->format('H:i:s'),
+            RoomSession::SESSION_END => Carbon::today()->setHour(15)->setMinute(19)->setSecond(59)->format('H:i:s'),
+        ]);
+    }
 }

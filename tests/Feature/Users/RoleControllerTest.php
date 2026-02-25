@@ -14,7 +14,9 @@ class RoleControllerTest extends TestCase
      */
     public function test_example(): void
     {
-        var_dump(EnumsRole::SUPER_ADMIN->value);
+        if (false) {
+            var_dump(EnumsRole::SUPER_ADMIN->value);
+        }
         $this->assertEquals('SUPER_ADMIN', EnumsRole::SUPER_ADMIN->value);
     }
 }

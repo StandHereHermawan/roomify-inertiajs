@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use App\Dummies\UserDataExamples;
 use App\Enums\EnumsRole;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\UserHasRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -41,14 +43,14 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             User::EMAIL_VERIFIED_AT => null,
         ]);
     }
 
     public function terryandrewdavis(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             User::NAME => 'Terry Andrew Davis',
             User::EMAIL => 'terry@localhost.com',
             User::EMAIL_VERIFIED_AT => now(),
@@ -59,12 +61,38 @@ class UserFactory extends Factory
 
     public function superAdmin(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             User::NAME => EnumsRole::SUPER_ADMIN->value,
-            User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMY,
+            User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMIES,
             User::EMAIL_VERIFIED_AT => now(),
             User::PASSWORD => Hash::make('password'),
             User::REMEMBER_TOKEN => Str::random(10),
         ]);
+    }
+
+    public function superAdminWithRole(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            User::NAME => EnumsRole::SUPER_ADMIN->value,
+            User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMIES,
+            User::EMAIL_VERIFIED_AT => now(),
+            User::PASSWORD => Hash::make('password'),
+            User::REMEMBER_TOKEN => Str::random(10),
+        ])->afterCreating(function (User $user) {
+            // Relasi ini hanya dibuat jika ->superAdmin() dipanggil
+            $roleAdmin = Role::where(Role::NAME, EnumsRole::SUPER_ADMIN->value)->first() ??
+                Role::create([Role::NAME => EnumsRole::SUPER_ADMIN->value]);
+            $user->roles()->syncWithoutDetaching([$roleAdmin->id]);
+        });
+    }
+
+    public function hasVisitorRole(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            // Relasi ini hanya dibuat jika ->superAdmin() dipanggil
+            $roleAdmin = Role::where(Role::NAME, EnumsRole::VISITOR->value)->first() ??
+                Role::create([Role::NAME => EnumsRole::VISITOR->value]);
+            $user->roles()->syncWithoutDetaching([$roleAdmin->id]);
+        });
     }
 }

@@ -64,4 +64,23 @@ class RoomFactory extends Factory
             Room::FLOOR_WIDE_IN_METER_SQUARED => fake()->randomFloat(2, 9, 100),
         ]);
     }
+
+    public function roomB211(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            Room::CODE => RoomDataExamples::ROOM_CODE_B_211,
+            
+            // Menghasilkan nama ruangan yang umum, misal: 'Ruang Rapat Cempaka'
+            Room::NAME => 'Ruang ' . fake()->words(2, true),
+            
+            // Menghasilkan teks deskripsi yang terdiri dari 3 paragraf
+            Room::DESCRIPTION => fake()->paragraphs(3, true),
+
+            // Menghasilkan angka float untuk tinggi ruangan, misal: 3.50 (meter)
+            Room::HEIGHT_IN_METER => fake()->randomFloat(2, 2.5, 4.5),
+
+            // Menghasilkan angka float untuk luas lantai, misal: 25.50 (meter persegi)
+            Room::FLOOR_WIDE_IN_METER_SQUARED => fake()->randomFloat(2, 9, 100),
+        ]);
+    }
 }

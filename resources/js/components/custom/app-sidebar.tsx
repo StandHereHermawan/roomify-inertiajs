@@ -16,6 +16,7 @@ import {
     UserCircle2Icon,
     UserCheck2Icon,
     CheckCircle,
+    PlusCircleIcon,
 } from "lucide-react"
 import { NavUser } from '@/components/ui/old/nav-user';
 import {
@@ -43,36 +44,72 @@ export function AppSidebar() {
         },
     ];
 
-    const contentNavItems: NavItem[] = [
+    const roomSessionNavItems: NavItem[] = [
         {
-            title: "Room Pages",
-            href: route('room.page'),
-            icon: DoorOpen,
-        },
-        {
-            title: "Room Session Pages",
+            title: "Room Session List",
             href: route('room.session.page'),
             icon: Clock,
         },
         {
-            title: "Room Reservation Pages",
-            href: route('room.reservation.page'),
-            icon: Clock,
+            title: "Add Room Session",
+            href: route('add.room.session.page'),
+            icon: PlusCircleIcon,
         },
+    ];
+
+    const userNavItems: NavItem[] = [
         {
-            title: "Registered User Pages",
+            title: "Registered User List",
             href: route('user.page'),
             icon: UserCircle2Icon,
         },
         {
-            title: "Active Session Pages",
+            title: "User With Role List",
+            href: route('user.with.role.page'),
+            icon: UserCircle2Icon,
+        },
+        {
+            title: "Logged Session List",
             href: route('user.session.page'),
             icon: UserCheck2Icon,
         },
         {
-            title: "Role Pages",
+            title: "Role List",
             href: route('role.page'),
             icon: CheckCircle,
+        },
+        {
+            title: "Add Role",
+            href: route('add.role.page'),
+            icon: PlusCircleIcon,
+        },
+    ];
+
+    const roomNavItems: NavItem[] = [
+        {
+            title: "Room List",
+            href: route('room.page'),
+            icon: DoorOpen,
+        },
+        {
+            title: "Add Room",
+            href: route('add.room.page'),
+            icon: PlusCircleIcon,
+        },
+        {
+            title: "Add Room Reservation",
+            href: route('add.room.reservation.page'),
+            icon: PlusCircleIcon,
+        },
+        {
+            title: "Room Reservation List",
+            href: route('room.reservation.page'),
+            icon: Clock,
+        },
+        {
+            title: "Room Reservation V2 List",
+            href: route('room.reservation.with.user.and.room.information.page'),
+            icon: Clock,
         },
     ];
 
@@ -135,6 +172,7 @@ export function AppSidebar() {
     ///          ],
     ///      },
     /// ];
+    ///
 
     return (
         <Sidebar collapsible="icon" variant="inset">
@@ -152,7 +190,9 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={dashboardNavItems} />
-                <NavMain items={contentNavItems} titleSection="Content"/>
+                <NavMain items={roomSessionNavItems} titleSection="Room Session" />
+                <NavMain items={roomNavItems} titleSection="Room Section" />
+                <NavMain items={userNavItems} titleSection="User Section" />
                 {/* Old Stuff, Not Yet Removed 4 Nov 2025. <NavAccordeon items={navigationOnAccordeonItems} name="Content" /> */}
             </SidebarContent>
 

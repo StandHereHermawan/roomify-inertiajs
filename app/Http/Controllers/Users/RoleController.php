@@ -23,4 +23,9 @@ class RoleController extends Controller
 
         return Inertia::render('users/role', [UserIndexRequest::PAGE => $page]);
     }
+
+    public function addRole()
+    {
+        return Inertia::render('users/add-role');
+    }
 }

@@ -20,4 +20,9 @@ class RoomController extends Controller
 
         return Inertia::render('room/page', [RoomIndexRequest::PAGE => $page, RoomIndexRequest::PER_PAGE => $request->validated()[RoomIndexRequest::PER_PAGE]]);
     }
+
+    public function addRoom()
+    {
+        return Inertia::render('room/add-room');
+    }
 }

@@ -22,8 +22,6 @@ return new class extends Migration
         if (Schema::hasTable(self::TABLE_NAME)) {
             # code...
         } else {
-
-
             Schema::create(self::TABLE_NAME, function (Blueprint $table) {
                 $table
                     ->id()
@@ -53,9 +51,12 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();
 
+                // Menambahkan kombinasi unik
+                $table->unique([self::USER_ID, self::ROLE_ID]);
+
                 $table->softDeletesDatetime();
                 $table->datetimes(); // created_at & updated_at
-                //     $table->timestamps();
+                //  $table->timestamps();
             });
         }
     }

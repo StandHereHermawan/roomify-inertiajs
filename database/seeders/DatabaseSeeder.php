@@ -19,25 +19,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        User::factory(5)->create();
+        User::factory(5)->hasVisitorRole()->create();
 
         DB::transaction(function () {
             $user = User::select()->where(User::NAME, '=', EnumsRole::SUPER_ADMIN->value)->first() ??
                 User::factory()->create([
                     User::NAME => EnumsRole::SUPER_ADMIN->value,
                     User::PASSWORD => Hash::make('password'),
-                    User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMY,
+                    User::EMAIL => UserDataExamples::SUPER_ADMIN_EMAIL_DUMMIES,
                 ]);
 
-            $role = Role::where(Role::NAME, '=', EnumsRole::SUPER_ADMIN->value)->first() ??
+            $role_super_admin = Role::where(Role::NAME, '=', EnumsRole::SUPER_ADMIN->value)->first() ??
                 Role::create([
                     Role::NAME => EnumsRole::SUPER_ADMIN->value
                 ]);
 
-            UserHasRole::where(UserHasRole::USER_ID, '=', $user->getId())->first() ?? UserHasRole::create([
-                UserHasRole::USER_ID => $user->getId(),
-                UserHasRole::ROLE_ID => $role->getId(),
-            ]);
+            UserHasRole::where(UserHasRole::USER_ID, '=', $user->getId())->first() ??
+                UserHasRole::create([
+                    UserHasRole::USER_ID => $user->getId(),
+                    UserHasRole::ROLE_ID => $role_super_admin->getId(),
+                ]);
         });
 
         $this->call([
