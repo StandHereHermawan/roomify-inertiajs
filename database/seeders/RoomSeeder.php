@@ -17,7 +17,7 @@ class RoomSeeder extends Seeder
     {
         DB::transaction(function () {
             Log::debug('Membuat Data Sintetik Tabel Room...');
-            Room::factory()->count(16)->create();
+            Room::factory()->count(16)->hasTwoImage()->create();
             Log::debug('Membuat Data Sintetik Tabel Room Selesai.');
         });
     }

@@ -129,7 +129,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/old/input';
 import { Transition } from '@headlessui/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 
 export default function AddRoomReservation() {
     // 1. Inisialisasi useForm dengan semua field yang dibutuhkan

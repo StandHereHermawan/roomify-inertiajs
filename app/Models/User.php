@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Traits\Attributes\HasIdentifier;
 use App\Traits\HasBasicAudit;
 use App\Traits\Relation\HasRelationWithRoleModel;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,7 +65,15 @@ class User extends Authenticatable
         ];
     }
 
-    // app/Models/User.php
+    public function sessions()
+    {
+        return $this->hasMany(AuthenticationSession::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(RoomReservation::class);
+    }
 
     public function roles()
     {

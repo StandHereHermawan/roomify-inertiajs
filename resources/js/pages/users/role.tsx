@@ -7,7 +7,7 @@ import {
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import RoleTable from '@/components/custom/pagination/content/table-role-pages';
 
 export default function ({ page }: { page: Paginator<Role> }) {

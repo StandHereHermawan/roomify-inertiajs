@@ -7,7 +7,7 @@ import {
     type BreadcrumbItem
 } from '@/types';
 import { Form, Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SpecificCustomLayout from '@/layouts/custom/specific-layout';
 import HeadingSmall from '@/components/ui/old/heading-small';
 

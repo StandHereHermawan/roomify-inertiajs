@@ -8,7 +8,7 @@ import {
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 
 export default function ({ page }: { page: Paginator<Room> }) {
 

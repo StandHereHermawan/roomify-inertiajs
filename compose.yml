@@ -1,0 +1,83 @@
+services:
+  mysql-db:
+    image: mysql:8.2.0-1.el8
+    container_name: mysql-db-container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: roomify
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db-roomify
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-ppassword"]
+      retries: 3
+      timeout: 5s
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.25"
+          memory: 600m
+        limits:
+          cpus: "1"
+          memory: 1g
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.2
+    container_name: phpmyadmin-container
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: password
+      PMA_AUTH_TYPE: 'config'
+      PMA_USER: 'root'
+      PMA_PASSWORD: 'password'
+    networks:
+      - backend-network
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.1"
+          memory: 50m
+        limits:
+          cpus: "1"
+          memory: 100m
+
+  master:
+    image: chrislusf/seaweedfs:4.17_full
+    container_name: seaweedfs-master
+    ports:
+      - "9333:9333" # Port Master (untuk koordinasi)
+    command: "master -ip=master"
+  volume:
+    image: chrislusf/seaweedfs:4.17_full
+    container_name: seaweedfs-volume
+    ports:
+      - "8080:8080" # Port akses file/gambar
+    command: "volume -mserver=master:9333 -port=8080"
+    depends_on:
+      - master
+  s3:
+    image: chrislusf/seaweedfs:4.17_full
+    container_name: seaweedfs-s3
+    ports:
+      - "8333:8333" # Port API S3 (untuk Laravel/Inertia)
+    command: "s3 -master=master:9333"
+    depends_on:
+      - master
+      - volume
+
+
+networks:
+  backend-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

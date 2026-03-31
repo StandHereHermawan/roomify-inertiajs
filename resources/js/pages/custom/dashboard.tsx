@@ -1,5 +1,5 @@
 import { PlaceholderPattern } from '@/components/ui/old/placeholder-pattern';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 

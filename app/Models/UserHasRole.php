@@ -25,7 +25,7 @@ class UserHasRole extends Model
 
     public const TABLE_NAME = "sipr_user_has_roles";
 
-    protected $table = UserHasRole::TABLE_NAME;
+    protected $table = self::TABLE_NAME;
     protected $primaryKey = self::ID;
     protected $keyType = "int";
     public $incrementing = true;

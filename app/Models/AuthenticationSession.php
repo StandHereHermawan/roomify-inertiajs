@@ -7,7 +7,7 @@ use App\Traits\HasBasicAudit;
 use App\Traits\Relation\HasRelationWithUserModel;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSession extends Model
+class AuthenticationSession extends Model
 {
     /**
      * @use HasBasicAudit<App\Traits\HasBasicAudit> 
@@ -25,6 +25,9 @@ class UserSession extends Model
 
     protected $table = self::TABLE_NAME;
     protected $primaryKey = self::ID;
+    protected $keyType = "string";
+    public $incrementing = false;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

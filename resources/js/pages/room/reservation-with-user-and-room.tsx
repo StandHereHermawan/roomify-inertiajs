@@ -6,7 +6,7 @@ import {
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import RoomReservationWithUserAndRoomInfoTable from '@/components/custom/pagination/content/table-room-reservation-with-user-and-room-info-pages';
 
 export default function ({ page }: { page: Paginator<unknown> }) {

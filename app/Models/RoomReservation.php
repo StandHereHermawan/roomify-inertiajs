@@ -31,6 +31,11 @@ class RoomReservation extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         self::ROOM_ID,
         self::RESERVATION_DATE,
@@ -41,4 +46,22 @@ class RoomReservation extends Model
         self::CREATED_AT,
         self::UPDATED_AT,
     ];
+
+    public function room()
+    {
+        // Satu comment dimiliki oleh satu post
+        return $this->belongsTo(Room::class);
+    }
+
+    public function roomSessions()
+    {
+        return $this->belongsToMany(
+            RoomSession::class,                // Model tujuan
+            RoomSessionReservation::TABLE_NAME,     // Nama tabel pivot
+            RoomSessionReservation::ROOM_RESERVATION_ID,                 // Foreign key di tabel pivot untuk User
+            RoomSessionReservation::ROOM_SESSION_ID                  // Foreign key di tabel pivot untuk Role
+        )
+            ->withPivot(RoomSessionReservation::CREATED_AT)      // Mengambil kolom created_at dari tabel pivot
+            ->withTimestamps();            // Memastikan pivot timestamps ditangani otomatis
+    }
 }

@@ -18,7 +18,7 @@ import {
     // Room,
     type BreadcrumbItem
 } from '@/types';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SpecificCustomLayout from '@/layouts/custom/specific-layout';
 
 export default function () {
@@ -89,6 +89,36 @@ export default function () {
                                     />
 
                                     <InputError className="mt-2" message={errors.description} />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="height_in_meter">Height in Meter</Label>
+
+                                    <Input
+                                        id="height_in_meter"
+                                        type="height_in_meter"
+                                        className="mt-1 block w-full"
+                                        defaultValue=""
+                                        name="height_in_meter"
+                                        autoComplete="height_in_meter"
+                                        placeholder="Height in meter"
+                                    />
+
+                                    <InputError className="mt-2" message={errors.height_in_meter} />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="height_in_meter">Floor Wide In Meter Squared</Label>
+
+                                    <Input
+                                        id="height_in_meter"
+                                        type="height_in_meter"
+                                        className="mt-1 block w-full"
+                                        defaultValue=""
+                                        name="height_in_meter"
+                                        autoComplete="height_in_meter"
+                                        placeholder="Floor wide in meter squared"
+                                    />
+
+                                    <InputError className="mt-2" message={errors.height_in_meter} />
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <Button disabled={processing}>Save</Button>

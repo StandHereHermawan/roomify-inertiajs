@@ -5,15 +5,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     private const ID = "id";
-    private const TABLE_NAME = 'sipr_rooms';
+    private const TABLE_NAME = 'sipr_images';
     private const NAME = 'name';
     private const DESCRIPTION = 'description';
-    private const CODE = 'room_code';
-    private const THUMBNAIL = 'thumbnail';
-    private const HEIGHT = 'height_in_meter';
-    private const FLOOR_WIDE = 'floor_wide_in_meter_squared';
+    private const BINARY = 'binary';
     private const CREATED_AT = "created_at";
     private const UPDATED_AT = "updated_at";
 
@@ -26,12 +24,6 @@ return new class extends Migration {
             # code...
         } else {
             Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-                $description =
-                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit.' . ' ' .
-                    'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
-                    'Impedit, distinctio reiciendis rerum debitis hic quae dignissimos eos ex voluptates,' . ' ' .
-                    'quis voluptate quibusdam ad, nemo voluptatibus enim tempore doloremque qui officia?';
-
                 $table
                     ->id(self::ID)
                     ->autoIncrement()
@@ -39,9 +31,8 @@ return new class extends Migration {
                     ->nullable(false);
 
                 $table
-                    ->string(self::CODE, 255)
-                    ->nullable(false)
-                    ->unique();
+                    ->binary(self::BINARY)
+                    ->nullable();
 
                 $table
                     ->string(self::NAME, 255)
@@ -51,19 +42,7 @@ return new class extends Migration {
                 $table
                     ->longText(self::DESCRIPTION)
                     ->nullable()
-                    ->default($description);
-
-                $table
-                    ->binary(self::THUMBNAIL)
-                    ->nullable();
-
-                $table
-                    ->float(self::HEIGHT)
-                    ->nullable(true);
-
-                $table
-                    ->float(self::FLOOR_WIDE)
-                    ->nullable(true);
+                    ->default(null);
 
                 $table
                     ->dateTime(self::CREATED_AT)

@@ -48,7 +48,23 @@ class RoomReservationController extends Controller
         return Inertia::render('room/reservation-with-user-and-room', [RoomReservationIndexRequest::PAGE => $page, RoomReservationIndexRequest::PER_PAGE => $request->validated()[RoomReservationIndexRequest::PER_PAGE]]);
     }
 
-    public function addRoomReservation() {
+    public function roomReservationJson(RoomReservationIndexRequest $request)
+    {
+        $page = RoomReservation::with('user')->with('roomSessions')->with('room')
+            ->paginate(
+                $request->validated()[RoomReservationIndexRequest::PER_PAGE],
+                ['*'],
+                RoomReservationIndexRequest::PAGE,
+                $request->validated()[RoomReservationIndexRequest::PAGE]
+            )->withQueryString();
+
+        Log::debug($page);
+
+        return $page;
+    }
+
+    public function addRoomReservation()
+    {
         return Inertia::render('room/add-reservation');
     }
 }

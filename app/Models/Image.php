@@ -3,31 +3,24 @@
 namespace App\Models;
 
 use App\Casts\StorageImageCasts;
-use App\Traits\HasBasicAudit;
 use App\Traits\Attributes\HasIdentifier;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasBasicAudit;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Image extends Model
 {
     /**
-     * @use HasFactory<\Database\Factories\RoomFactory>
-     * @use HasBasicAudit<App\Traits\Audit\HasBasicAudit>
-     * @use HasIdentifier<App\Traits\Attribute\HasIdentifier>
+     * @use HasBasicAudit<App\Traits\Audit\HasBasicAudit> 
+     * @use HasIdentifier<App\Traits\Attributes\HasIdentifier> 
      * 
      */
-    use HasBasicAudit,
-        HasFactory,
-        HasIdentifier;
+    use HasIdentifier,
+        HasBasicAudit;
 
-    public const TABLE_NAME = 'sipr_rooms';
+    public const TABLE_NAME = "sipr_images";
     public const NAME = 'name';
-    public const CODE = 'room_code';
-    public const THUMBNAIL = 'thumbnail';
     public const DESCRIPTION = 'description';
-    public const HEIGHT_IN_METER = 'height_in_meter';
-    public const FLOOR_WIDE_IN_METER_SQUARED = 'floor_wide_in_meter_squared';
+    public const BINARY = 'binary';
 
     protected $table = self::TABLE_NAME;
     protected $primaryKey = self::ID;
@@ -42,11 +35,8 @@ class Room extends Model
      */
     protected $fillable = [
         self::NAME,
-        self::CODE,
         self::DESCRIPTION,
-        self::THUMBNAIL,
-        self::HEIGHT_IN_METER,
-        self::FLOOR_WIDE_IN_METER_SQUARED,
+        self::BINARY,
         self::ID,
         self::CREATED_AT,
         self::UPDATED_AT
@@ -58,16 +48,17 @@ class Room extends Model
      * @var array
      */
     protected $casts = [
-        self::THUMBNAIL => StorageImageCasts::class,
+        self::BINARY => StorageImageCasts::class,
     ];
 
-    public function images()
+
+    public function rooms()
     {
         return $this->belongsToMany(
-            Image::class,                // Model tujuan
+            Room::class,                // Model tujuan
             RoomHasImages::TABLE_NAME,     // Nama tabel pivot
+            RoomHasImages::IMAGE_ID,                  // Foreign key di tabel pivot untuk Image
             RoomHasImages::ROOM_ID,                 // Foreign key di tabel pivot untuk Room
-            RoomHasImages::IMAGE_ID                  // Foreign key di tabel pivot untuk Image
         )
             ->withPivot(RoomHasImages::CREATED_AT)      // Mengambil kolom created_at dari tabel pivot
             ->withTimestamps();            // Memastikan pivot timestamps ditangani otomatis

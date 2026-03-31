@@ -8,7 +8,7 @@ import InputError from '@/components/ui/old/input-error';
 import { Button } from '@/components/ui/old/button';
 import { Input } from '@/components/ui/old/input';
 import { Label } from '@/components/ui/old/label';
-import AppLayout from '@/layouts/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SettingsLayout from '@/layouts/settings/layout';
 
 const breadcrumbs: BreadcrumbItem[] = [

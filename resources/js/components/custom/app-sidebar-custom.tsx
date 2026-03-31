@@ -1,22 +1,12 @@
 import {
-    /// AudioWaveform,
-    /// Command,
-    /// Frame,
-    /// GalleryVerticalEnd,
-    /// Map,
-    /// PieChart,
-    /// SquareTerminal,
-    /// Settings2,
-    /// Bot,
-    /// Folder, 
     LayoutGrid,
-    // BookOpen,
     DoorOpen,
     Clock,
     UserCircle2Icon,
     UserCheck2Icon,
     CheckCircle,
     PlusCircleIcon,
+    // BookOpen,
 } from "lucide-react"
 import { NavUser } from '@/components/ui/old/nav-user';
 import {
@@ -29,12 +19,12 @@ import {
     SidebarMenuItem
 } from '@/components/ui/old/sidebar';
 import { Link } from '@inertiajs/react';
-import AppLogo from '../ui/old/app-logo';
-/// import { NavMain as NavAccordeon } from '../custom/nav-main';
+import AppLogo from './ui/app-logo';
 import { NavMain } from "../ui/old/nav-main";
 import { NavItem } from "@/types";
+// import { NavMain as NavAccordeon } from '../custom/nav-main';
 
-export function AppSidebar() {
+export function AppSidebarCustom() {
 
     const dashboardNavItems: NavItem[] = [
         {
@@ -103,11 +93,6 @@ export function AppSidebar() {
         },
         {
             title: "Room Reservation List",
-            href: route('room.reservation.page'),
-            icon: Clock,
-        },
-        {
-            title: "Room Reservation V2 List",
             href: route('room.reservation.with.user.and.room.information.page'),
             icon: Clock,
         },
@@ -115,64 +100,64 @@ export function AppSidebar() {
 
     /// Old Stuff, Not Yet Removed 4 Nov 2025
     ///
-    /// const footerNavItemsAcc = [
-    ///     {
-    ///         title: "Docs and Repos",
-    ///         url: "#",
-    ///         icon: BookOpen,
-    ///         isActive: false,
-    ///         items: [
-    ///             {
-    ///                 title: "Repository",
-    ///                 url: 'https://github.com/laravel/react-starter-kit',
-    ///             },
-    ///             {
-    ///                 title: "Documentation",
-    ///                 url: 'https://laravel.com/docs/starter-kits#react',
-    ///             },
-    ///         ],
-    ///     }
-    /// ];
-    ///
-    /// const navigationOnAccordeonItems = [
-    ///     {
-    ///         title: "Static Pages",
-    ///         url: "#",
-    ///         icon: BookOpen,
-    ///         isActive: false,
-    ///         items: [
-    ///             {
-    ///                 title: "Dashboard 07",
-    ///                 url: route('dashboard07'),
-    ///             },
-    ///             {
-    ///                 title: "Sidebar 01",
-    ///                 url: route('sidebar01'),
-    ///             },
-    ///             {
-    ///                 title: "Sidebar 11",
-    ///                 url: route('sidebar11'),
-    ///             },
-    ///         ],
-    ///     },
-    ///      {
-    ///          title: "Room",
-    ///          url: "#",
-    ///          icon: DoorOpen,
-    ///          isActive: false,
-    ///          items: [
-    ///              {
-    ///                  title: "Room Pages",
-    ///                  url: route('room.page'),
-    ///              },
-    ///              {
-    ///                  title: "Room Session Pages",
-    ///                  url: route('room.session.page'),
-    ///              },
-    ///          ],
-    ///      },
-    /// ];
-    ///
+    // const footerNavItemsAcc = [
+    //     {
+    //         title: "Docs and Repos",
+    //         url: "#",
+    //         icon: BookOpen,
+    //         isActive: false,
+    //         items: [
+    //             {
+    //                 title: "Repository",
+    //                 url: 'https://github.com/laravel/react-starter-kit',
+    //             },
+    //             {
+    //                 title: "Documentation",
+    //                 url: 'https://laravel.com/docs/starter-kits#react',
+    //             },
+    //         ],
+    //     }
+    // ];
+    
+    // const navigationOnAccordeonItems = [
+    //     {
+    //         title: "Static Pages",
+    //         url: "#",
+    //         icon: BookOpen,
+    //         isActive: false,
+    //         items: [
+    //             {
+    //                 title: "Dashboard 07",
+    //                 url: route('dashboard07'),
+    //             },
+    //             {
+    //                 title: "Sidebar 01",
+    //                 url: route('sidebar01'),
+    //             },
+    //             {
+    //                 title: "Sidebar 11",
+    //                 url: route('sidebar11'),
+    //             },
+    //         ],
+    //     },
+    //      {
+    //          title: "Room",
+    //          url: "#",
+    //          icon: DoorOpen,
+    //          isActive: false,
+    //          items: [
+    //              {
+    //                  title: "Room Pages",
+    //                  url: route('room.page'),
+    //              },
+    //              {
+    //                  title: "Room Session Pages",
+    //                  url: route('room.session.page'),
+    //              },
+    //          ],
+    //      },
+    // ];
+    
 
     return (
         <Sidebar collapsible="icon" variant="inset">
@@ -193,11 +178,13 @@ export function AppSidebar() {
                 <NavMain items={roomSessionNavItems} titleSection="Room Session" />
                 <NavMain items={roomNavItems} titleSection="Room Section" />
                 <NavMain items={userNavItems} titleSection="User Section" />
-                {/* Old Stuff, Not Yet Removed 4 Nov 2025. <NavAccordeon items={navigationOnAccordeonItems} name="Content" /> */}
+                {/* Old Stuff, Not Yet Removed 4 Nov 2025.  */}
+                {/* <NavAccordeon items={navigationOnAccordeonItems} name="Content" /> */}
             </SidebarContent>
 
             <SidebarFooter>
-                {/* Old Stuff, Not Yet Removed 4 Nov 2025. <NavAccordeon items={footerNavItemsAcc}/> */}
+                {/* Old Stuff, Not Yet Removed 4 Nov 2025.  */}
+                {/* <NavAccordeon items={footerNavItemsAcc}/> */}
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

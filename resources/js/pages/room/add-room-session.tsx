@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/old/label';
 import {
     type BreadcrumbItem
 } from '@/types';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SpecificCustomLayout from '@/layouts/custom/specific-layout';
 
 export default function () {

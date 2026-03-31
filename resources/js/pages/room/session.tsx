@@ -7,7 +7,7 @@ import {
     type BreadcrumbItem
 } from '@/types';
 import { Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/custom/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import RoomSessionTable from '@/components/custom/pagination/content/table-room-session-pages';
 
 export default function ({ page }: { page: Paginator<RoomSession> }) {

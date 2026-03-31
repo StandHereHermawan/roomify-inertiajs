@@ -55,6 +55,7 @@ export interface UserSession {
 
 export interface Room {
     id: number;
+    thumbnail: string;
     room_code: string;
     name: string;
     description: string;

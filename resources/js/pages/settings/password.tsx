@@ -1,5 +1,5 @@
 import InputError from '@/components/ui/old/input-error';
-import AppLayout from '@/layouts/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SettingsLayout from '@/layouts/settings/layout';
 import { type BreadcrumbItem } from '@/types';
 import { Transition } from '@headlessui/react';

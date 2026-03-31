@@ -4,7 +4,7 @@ import AppearanceTabs from '@/components/ui/old/appearance-tabs';
 import HeadingSmall from '@/components/ui/old/heading-small';
 import { type BreadcrumbItem } from '@/types';
 
-import AppLayout from '@/layouts/app-layout';
+import AppLayout from '@/layouts/custom/app-sidebar-layout-wrapper';
 import SettingsLayout from '@/layouts/settings/layout';
 
 const breadcrumbs: BreadcrumbItem[] = [
