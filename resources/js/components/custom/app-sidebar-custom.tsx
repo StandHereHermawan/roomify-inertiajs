@@ -1,3 +1,7 @@
+// Commented barangkali butuh grouping routing pake Ui button Accordeon.
+// 
+// import { NavMain as NavAccordeon } from '../custom/nav-main';
+// 
 import {
     LayoutGrid,
     DoorOpen,
@@ -20,9 +24,8 @@ import {
 } from '@/components/ui/old/sidebar';
 import { Link } from '@inertiajs/react';
 import AppLogo from './ui/app-logo';
-import { NavMain } from "../ui/old/nav-main";
+import { NavigationSection } from "../ui/custom/NavigationSection";
 import { NavItem } from "@/types";
-// import { NavMain as NavAccordeon } from '../custom/nav-main';
 
 export function AppSidebarCustom() {
 
@@ -34,7 +37,7 @@ export function AppSidebarCustom() {
         },
     ];
 
-    const roomSessionNavItems: NavItem[] = [
+    const roomSessionBrowses: NavItem[] = [
         {
             title: "Room Session List",
             href: route('room.session.page'),
@@ -47,7 +50,7 @@ export function AppSidebarCustom() {
         },
     ];
 
-    const userNavItems: NavItem[] = [
+    const userBrowses: NavItem[] = [
         {
             title: "Registered User List",
             href: route('user.page'),
@@ -75,7 +78,7 @@ export function AppSidebarCustom() {
         },
     ];
 
-    const roomNavItems: NavItem[] = [
+    const roomBrowses: NavItem[] = [
         {
             title: "Room List",
             href: route('room.page'),
@@ -86,15 +89,18 @@ export function AppSidebarCustom() {
             href: route('add.room.page'),
             icon: PlusCircleIcon,
         },
-        {
-            title: "Add Room Reservation",
-            href: route('add.room.reservation.page'),
-            icon: PlusCircleIcon,
-        },
+    ];
+
+    const roomReservationBrowses: NavItem[] = [
         {
             title: "Room Reservation List",
             href: route('room.reservation.with.user.and.room.information.page'),
             icon: Clock,
+        },
+        {
+            title: "Add Room Reservation",
+            href: route('add.room.reservation.page'),
+            icon: PlusCircleIcon,
         },
     ];
 
@@ -158,7 +164,6 @@ export function AppSidebarCustom() {
     //      },
     // ];
     
-
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -174,10 +179,11 @@ export function AppSidebarCustom() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={dashboardNavItems} />
-                <NavMain items={roomSessionNavItems} titleSection="Room Session" />
-                <NavMain items={roomNavItems} titleSection="Room Section" />
-                <NavMain items={userNavItems} titleSection="User Section" />
+                <NavigationSection items={dashboardNavItems} />
+                <NavigationSection items={roomSessionBrowses} titleSection="Room Session" />
+                <NavigationSection items={roomBrowses} titleSection="Room Section" />
+                <NavigationSection items={roomReservationBrowses} titleSection="Room Rservation Section" />
+                <NavigationSection items={userBrowses} titleSection="User Section" />
                 {/* Old Stuff, Not Yet Removed 4 Nov 2025.  */}
                 {/* <NavAccordeon items={navigationOnAccordeonItems} name="Content" /> */}
             </SidebarContent>

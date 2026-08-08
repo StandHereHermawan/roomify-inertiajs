@@ -14,7 +14,9 @@ import {
 function RoomCardList({ paginator }: PaginationComponentProps<Room>) {
     return (
         <div className='@container/main'>
-            {/* <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @7xl/main:grid-cols-4'> */}
+            {/* The commented section was the default tailwind classes that not yet customed. 
+                <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @7xl/main:grid-cols-4'>
+            */}
             <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @7xl/main:grid-cols-4'>
                 {paginator.data.map((room, index) => {
                     return (
@@ -38,10 +40,10 @@ function RoomCardList({ paginator }: PaginationComponentProps<Room>) {
                                 </CardDescription>
                             </CardContent>
                             <CardFooter className="grid grid-cols-1 gap-2 @[300px]/card:grid-cols-2">
-                                <CardDescription className="">
+                                <CardDescription className="line-clamp-1">
                                     Room Wide : {room.floor_wide_in_meter_squared} m<sup>2</sup>.
                                 </CardDescription>
-                                <CardDescription className="">
+                                <CardDescription className="line-clamp-1">
                                     Room Height : {room.height_in_meter} m.
                                 </CardDescription>
                             </CardFooter>

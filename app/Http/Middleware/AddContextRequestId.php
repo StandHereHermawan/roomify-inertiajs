@@ -79,20 +79,11 @@ class AddContextRequestId
 
         /**
          *|
-         *| Start logging session with this context.
+         *| Start logging session with data from $logContext.
          */
         Log::withContext($logContext);
 
         Log::info('Request {http_method} {request_id} {controller_class}.');
-
-        /**
-         *| @subject to removal.
-         *|
-         *| Save response object to the request attribute so it could be handled in terminate() method below.
-         *| but this is redundant according to LLM's. the terminate method already has Response parameter.
-         *| I will leave it commented.
-         */
-        // === $request->attributes->set('response', $response); ===
 
         return $response;
     }
@@ -107,6 +98,7 @@ class AddContextRequestId
          *| UUID to request and context log. made every request to this website has a uuid representation.
          */
         $uuid = $request->attributes->get('request_id');
+
         if ($uuid == null) {
             $uuid = Str::uuid()->toString();
 
@@ -236,29 +228,4 @@ class AddContextRequestId
 
         return $params;
     }
-
-    /**
-     *|
-     *| Capture and cleaning response data (optional).
-     *|
-     *| protected function getSanitizedResponseData(Response $response) {
-     *|
-     *|     // === Only response log if APP_DEBUG=true to evade overhead in production. ===
-     *|     if (!config('app.debug')) {
-     *|         return null; // === Don't capture log body in production. ===
-     *|     }
-     *|
-     *|     // === Only capture json response and evade overly large response ===
-     *|     if ($response instanceof \Illuminate\Http\JsonResponse) {
-     *|         $content = json_decode($response->getContent(), true);
-     *|         if (json_last_error() === JSON_ERROR_NONE) {
-     *|             return $this->sanitizeParameters($content);
-     *|         }
-     *|     }
-     *|
-     *|     // === Limits the length of captured log for html response or other so it doesnt overflow the log. ===
-     *|     return substr($response->getContent(), 0, 500) . '... (truncated)';
-     *| }
-     *|
-     */
 }
