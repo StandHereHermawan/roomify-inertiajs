@@ -136,7 +136,8 @@ export default function AddRoomReservation() {
     const {
         data,
         setData,
-        patch,
+        // patch,
+        post,
         processing,
         errors,
         recentlySuccessful,
@@ -153,10 +154,10 @@ export default function AddRoomReservation() {
     ];
 
     // 2. Fungsi untuk menangani pengiriman data
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
         // Ganti route('') dengan nama route tujuan Anda, misal: 'reservation.update'
-        patch(route('reservation.update'), {
+        post(route('add.room.reservation'), {
             preserveScroll: true,
         });
     };
@@ -227,7 +228,7 @@ export default function AddRoomReservation() {
                                 leave="transition ease-in-out"
                                 leaveTo="opacity-0"
                             >
-                                <p className="text-sm text-neutral-600">Saved</p>
+                                <p className="text-sm text-neutral-600">Sended</p>
                             </Transition>
                         </div>
                     </form>

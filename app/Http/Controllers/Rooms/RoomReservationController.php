@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rooms;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Reservation\CreateRoomReservationRequest;
 use App\Http\Requests\Room\RoomReservationIndexRequest;
 use App\Models\Room;
 use App\Models\RoomReservation;
@@ -23,7 +24,10 @@ class RoomReservationController extends Controller
 
         Log::debug($page);
 
-        return Inertia::render('room/reservation', [RoomReservationIndexRequest::PAGE => $page, RoomReservationIndexRequest::PER_PAGE => $request->validated()[RoomReservationIndexRequest::PER_PAGE]]);
+        return Inertia::render('room/reservation', [
+            RoomReservationIndexRequest::PAGE => $page,
+            RoomReservationIndexRequest::PER_PAGE => $request->validated()[RoomReservationIndexRequest::PER_PAGE]
+        ]);
     }
 
     public function showRoomReservationWithUserAndRoomPaginate(RoomReservationIndexRequest $request)
@@ -45,7 +49,10 @@ class RoomReservationController extends Controller
 
         Log::debug($page);
 
-        return Inertia::render('room/reservation-with-user-and-room', [RoomReservationIndexRequest::PAGE => $page, RoomReservationIndexRequest::PER_PAGE => $request->validated()[RoomReservationIndexRequest::PER_PAGE]]);
+        return Inertia::render('room/reservation-with-user-and-room', [
+            RoomReservationIndexRequest::PAGE => $page,
+            RoomReservationIndexRequest::PER_PAGE => $request->validated()[RoomReservationIndexRequest::PER_PAGE]
+        ]);
     }
 
     public function roomReservationJson(RoomReservationIndexRequest $request)
@@ -66,5 +73,12 @@ class RoomReservationController extends Controller
     public function addRoomReservation()
     {
         return Inertia::render('room/add-reservation');
+    }
+
+    public function createRoomReservation(CreateRoomReservationRequest $request)
+    {
+        $data = $request->validated();
+
+        Log::debug(json_encode($data));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rooms;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Room\CreateRoomRequest;
 use App\Http\Requests\Room\RoomIndexRequest;
 use App\Models\Room;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,7 @@ class RoomController extends Controller
         Log::debug($page);
 
         return Inertia::render(
-            'room/page',
+            'room/index-page',
             [
                 RoomIndexRequest::PAGE => $page,
                 RoomIndexRequest::PER_PAGE => $request->validated()[RoomIndexRequest::PER_PAGE]
@@ -82,5 +83,16 @@ class RoomController extends Controller
     public function addRoomPage()
     {
         return Inertia::render('room/add-room');
+    }
+
+    public function createRoom(CreateRoomRequest $request)
+    {
+        $data = $request->validated();
+
+        Log::debug(json_encode($data));
+
+        $savedRecord = Room::create($data);
+
+        Log::debug(json_encode($savedRecord));
     }
 }

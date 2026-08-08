@@ -1,0 +1,26 @@
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/old/sidebar';
+import { type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+
+export function NavigationSection({ items = [], titleSection = "Platform" }: { items: NavItem[], titleSection?: string }) {
+    const page = usePage();
+    return (
+        <SidebarGroup className="px-2 py-0">
+            <SidebarGroupLabel>{titleSection}</SidebarGroupLabel>
+            <SidebarMenu>
+                {
+                    items.map((item) => (
+                        <SidebarMenuItem key={item.title}>
+                            <SidebarMenuButton asChild isActive={page.url.startsWith(item.href)} tooltip={{ children: item.title }}>
+                                <Link href={item.href} prefetch>
+                                    {item.icon && <item.icon />}
+                                    <span>{item.title}</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    ))
+                }
+            </SidebarMenu>
+        </SidebarGroup>
+    );
+}

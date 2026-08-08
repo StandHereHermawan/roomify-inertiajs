@@ -1,5 +1,8 @@
-
+// 
+// import { Button } from '@/components/ui/button'; // Adjust path
+// 
 import {
+    ColumnDef,
     flexRender,
     getCoreRowModel,
     useReactTable,
@@ -12,48 +15,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table'; // Adjust path to your UI components
-// import { Button } from '@/components/ui/button'; // Adjust path
 import { PaginationComponentProps } from '@/types';
-// Define your columns
-// This can be in a separate file, e.g., columns.jsx
-export const columns = [
-    {
-        accessorKey: 'id',
-        header: 'ID',
-    },
-    {
-        accessorKey: 'user_name',
-        header: 'Reserved By',
-    },
-    {
-        accessorKey: 'room_code',
-        header: 'Room Code',
-    },
-    {
-        accessorKey: 'status',
-        header: 'Status',
-    },
-    {
-        accessorKey: 'determined_at',
-        header: 'Determined At',
-    },
-    {
-        accessorKey: 'reservation_date',
-        header: 'Reservation Date',
-    },
-    {
-        accessorKey: 'created_at',
-        header: 'Created At',
-    },
-    {
-        accessorKey: 'updated_at',
-        header: 'Updated At',
-    },
-];
 
-export default function RoomReservationWithUserAndRoomInfoTable({ paginator } : PaginationComponentProps<unknown>) {
+export default function RoomReservationWithUserAndRoomInfoTable({ paginator }: PaginationComponentProps<unknown>) {
     // 1. Get paginated data from Inertia props
-
     const {
         data, // This is the array of items for the current page
         // meta, // Laravel 10+ uses 'meta' by default for pagination info
@@ -65,6 +30,53 @@ export default function RoomReservationWithUserAndRoomInfoTable({ paginator } : 
     const totalPages = paginator.last_page;
 
     // 2. Configure React Table for server-side pagination
+    // Define your columns
+    // This can be in a separate file, e.g., columns.jsx
+    const columns: ColumnDef<unknown>[] = [
+        {
+            accessorKey: 'id',
+            header: 'ID',
+        },
+        {
+            accessorKey: 'user_name',
+            header: 'Reserved By',
+        },
+        {
+            accessorKey: 'room_code',
+            header: 'Room Code',
+        },
+        {
+            accessorKey: 'status',
+            header: 'Status',
+        },
+        {
+            accessorKey: 'determined_at',
+            header: 'Determined At',
+            cell: ({ getValue }) => {
+                const value = getValue<string>();
+
+                // Jika null, undefined, atau string kosong, tampilkan tanda '-'
+                if (!value) {
+                    return <span className="text-muted-foreground italic">Not yet determined</span>;
+                }
+
+                return value;
+            },
+        },
+        {
+            accessorKey: 'reservation_date',
+            header: 'Reservation Date',
+        },
+        {
+            accessorKey: 'created_at',
+            header: 'Created At',
+        },
+        {
+            accessorKey: 'updated_at',
+            header: 'Updated At',
+        },
+    ];
+
     const table = useReactTable({
         data: data, // Use the 'data' array from the paginator
         columns,
@@ -85,7 +97,6 @@ export default function RoomReservationWithUserAndRoomInfoTable({ paginator } : 
             <div className="flex items-center">
                 {/* ... your input and dropdown menu ... */}
             </div>
-
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableHeader>
@@ -108,17 +119,20 @@ export default function RoomReservationWithUserAndRoomInfoTable({ paginator } : 
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id}>
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </TableCell>
-                                    ))}
+                                    {
+                                        row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {
+                                                    flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )
+                                                }
+                                            </TableCell>
+                                        ))
+                                    }
                                 </TableRow>
-                            ))
-                        ) : (
+                            ))) : (
                             <TableRow>
                                 <TableCell
                                     colSpan={columns.length}
